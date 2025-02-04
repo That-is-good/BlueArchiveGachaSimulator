@@ -1,10 +1,11 @@
 # BlueArchiveGachaSimulator
-Simple BlueArchive Gacha Simulator
+## Simple BlueArchive Gacha Simulator
 
-How use this?
-1.Compile it with qt6, or If you're windows user you can choose release;
-2.In the folder "./resource/students.json" you can put the student's data in it
-for example:
+### How use this?
+  > 1.Compile it with qt6, or If you're windows user you can choose release;
+  > 2.In the folder "./resource/students.json" you can put the student's data in it
+  > 3.Where's the resource?Go to release to download.
+  > for example:
 ```json
   {
     "level1":[
