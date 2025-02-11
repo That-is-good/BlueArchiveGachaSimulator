@@ -50,6 +50,9 @@ Window {
         anchors.fill: parent;
         initialItem: start_lobby;
     }
+    AudioOutput{
+        id:ba_otherPlayer;
+    }
     Component {
         id: start_lobby;
         Rectangle{
@@ -72,15 +75,28 @@ Window {
                     }
                 }
             }
+            /*
             SoundEffect{
                 id:ba_login_hello;
-                source: "file:resource/SE/login"+Number(rdstu_eng.rand(5))+".wav";
+                source: "file:resource/voice/"+rdstu_eng.randomVoiceFile("resource/voice");
                 onPlayingChanged: {
                     if (!playing){
                         stack.replace(stack.currentItem, gachipre);
                     }
                 }
             }
+            */
+            MediaPlayer{
+                id:ba_login_hello;
+                source: "file:resource/voice/"+rdstu_eng.randomVoiceFile("resource/voice");
+                audioOutput: ba_otherPlayer;
+                onMediaStatusChanged: {
+                    if (mediaStatus == MediaPlayer.EndOfMedia){
+                        stack.replace(stack.currentItem, gachipre);
+                    }
+                }
+            }
+
             SoundEffect{
                 id:ba_logo_music;
                 source: "file:resource/music/ConstantModerato.wav";
@@ -191,6 +207,7 @@ Window {
                         }
                     }
                     onReleased:{
+                        backlogoimg_effect.stop();
                         backlogoimg.scale = 1;
                     }
                 }
@@ -226,6 +243,7 @@ Window {
                         }
                     }
                     onReleased:{
+                        gachi_10_confirmimg_effect.stop();
                         gachi_10_confirmimg.scale = 1;
                     }
                 }
@@ -261,6 +279,7 @@ Window {
                         }
                     }
                     onReleased:{
+                        gachi_1_confirmimg_effect.stop();
                         gachi_1_confirmimg.scale = 1;
                     }
                 }
@@ -311,6 +330,7 @@ Window {
                             gachi_pre_confirmimg_effect.start();
                         }
                         onReleased:{
+                            gachi_pre_confirmimg_effect.stop()
                             gachi_pre_confirmimg.scale = 1;
                         }
                     }
@@ -346,6 +366,7 @@ Window {
                             gachi_pre_cancelimg_effect.start();
                         }
                         onReleased:{
+                            gachi_pre_cancelimg_effect.stop()
                             gachi_pre_cancelimg.scale = 1;
                         }
                     }
@@ -381,6 +402,7 @@ Window {
                             gachi_pre_exitimg_effect.start();
                         }
                         onReleased:{
+                            gachi_pre_exitimg_effect.stop()
                             gachi_pre_exitimg.scale = 1;
                         }
                     }
@@ -887,8 +909,9 @@ Window {
             Rectangle{
                 anchors.fill: parent;
                 color: "transparent";
-                SoundEffect{
+                MediaPlayer{
                     id:stu_voice;
+                    audioOutput: ba_otherPlayer;
                 }
                 Image{
                     anchors.fill: parent;
@@ -967,15 +990,15 @@ Window {
                     }
                 }
                 Rectangle{
-                    x:1030;
-                    y:135;
+                    x:980;
+                    y:207;
+                    transform: Rotation { angle: -2.8}
+                    transformOrigin: Item.TopLeft;
                     Rectangle{
-                        x:130;
-                        y:32;
-                        width: 200
-                        height: 50;
-                        transformOrigin: Item.TopLeft;
-                        transform: Rotation { angle: -2.8}
+                        x:120;
+                        y:18;
+                        width: 230
+                        height: 60;
                         color: "transparent";
                         Text{
                             anchors.fill: parent;
@@ -986,12 +1009,10 @@ Window {
                         }
                     }
                     Rectangle{
-                        x:50;
-                        y:153;
-                        width: 280;
-                        height: 28;
-                        transformOrigin: Item.TopLeft;
-                        transform: Rotation { angle: -2.8}
+                        x:4;
+                        y:125;
+                        width: 360;
+                        height: 50;
                         color: "transparent";
                         Text{
                             anchors.centerIn: parent;
@@ -1002,12 +1023,10 @@ Window {
                         }
                     }
                     Rectangle{
-                        x:54;
-                        y:236;
-                        width: 280;
-                        height: 28;
-                        transformOrigin: Item.TopLeft;
-                        transform: Rotation { angle: -2.8}
+                        x:4;
+                        y:210;
+                        width: 360;
+                        height: 50;
                         color: "transparent";
                         Text{
                             anchors.centerIn: parent;
@@ -1018,12 +1037,10 @@ Window {
                         }
                     }
                     Rectangle{
-                        x:58;
-                        y:323;
-                        width: 280;
-                        height: 28;
-                        transformOrigin: Item.TopLeft;
-                        transform: Rotation { angle: -2.8}
+                        x:4;
+                        y:295;
+                        width: 360;
+                        height: 50;
                         color: "transparent";
                         Text{
                             anchors.centerIn: parent;
@@ -1034,12 +1051,10 @@ Window {
                         }
                     }
                     Rectangle{
-                        x:62;
-                        y:408;
-                        width: 280;
-                        height: 28;
-                        transformOrigin: Item.TopLeft;
-                        transform: Rotation { angle: -2.8}
+                        x:4;
+                        y:380;
+                        width: 360;
+                        height: 50;
                         color: "transparent";
                         Text{
                             anchors.centerIn: parent;
@@ -1050,15 +1065,14 @@ Window {
                         }
                     }
                     Rectangle{
-                        x:8;
-                        y:27;
-                        width: 108;
-                        height: 74;
-                        transformOrigin: Item.TopLeft;
-                        transform: Rotation { angle: -2.8}
+                        x:19;
+                        y:19;
+                        width: 88;
+                        height: 55;
                         color: "transparent";
                         Image{
                             anchors.centerIn: parent;
+                            anchors.fill: parent;
                             id: stu_academy;
                             visible: false;
                         }

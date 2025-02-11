@@ -94,3 +94,13 @@ switch (param) {
         return this->stu[this->stu_level][this->stu_index].getName();
     }
 }
+
+QString rdStu::randomVoiceFile(QString filep)
+{
+    QDir dir(filep);
+    if (dir.exists() && !dir.isEmpty()){
+        QStringList lst = dir.entryList(QStringList() << "*.ogg");
+        return lst[rand(lst.size())];
+    }
+    return "";
+}

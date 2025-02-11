@@ -8,6 +8,7 @@
 #include <QJsonArray>
 #include <QList>
 #include <QRandomGenerator>
+#include <QDir>
 #include "mystudent.h"
 
 class rdStu : public QObject
@@ -26,6 +27,7 @@ public:
     void setIndex(const int &);
     Q_INVOKABLE int getSize();
     Q_INVOKABLE QString getCur(int);
+    Q_INVOKABLE QString randomVoiceFile(QString);
 
 private:
     QList<Mystudent> *stu;
